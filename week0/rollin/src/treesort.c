@@ -1,4 +1,3 @@
-
 // treesort.c
 // Rollin Tschirgi
 // CSC311 Systems Software
@@ -15,13 +14,13 @@ struct node{
 };//node
 
 // define aliases
-deftype struct node Node;
-deftype struct node* NodePtr;
+typedef struct node Node;
+typedef struct node* NodePointer;
 // define a function that will create
 // a new tree that contains only a single
 // node
-NodePtr createRoot(int n){
-    NodePtr np = (NodePtr)malloc(sizeof(Node));
+NodePointer createRoot(int n){
+    NodePointer np = (NodePointer)malloc(sizeof(Node));
     np->value = n;
     np->lp = NULL;
     np->rp = NULL;
@@ -30,10 +29,10 @@ NodePtr createRoot(int n){
 
 // define a function that will add a new
 // node to an existing binary search tree
-NodePtr addNode(NodePtr np, int n){
-    NodePtr rp = np;
+NodePointer addNode(NodePointer np, int n){
+    NodePointer rp = np;
     
-    if(np==NULL){rp = createRoot(n);}
+    if(np == NULL){rp = createRoot(n);}
     else if(n < np->value){
        
         if(np->lp == NULL){np->lp = createRoot(n);}
@@ -41,7 +40,7 @@ NodePtr addNode(NodePtr np, int n){
     }
     else if(n > np->value){
        
-        if(np->rp==NULL){np->rp = createRoot(n);}
+        if(np->rp == NULL){np->rp = createRoot(n);}
         else{np->rp = addNode(np->rp, n);}
     }
     // if value to be added is already in tree, do nothing
@@ -53,7 +52,7 @@ NodePtr addNode(NodePtr np, int n){
 // traverse a binary search tree
 // in order, printing the values
 // found at each node
-void printNodes(NodePtr np){
+void printNodes(NodePointer np){
     if(np != NULL){
         printNodes(np->lp);
         printf("value at node = %4d \n", np->value);
@@ -69,7 +68,7 @@ int main( int argc, char** argv ) {
   // then print the integers in ascending order
     if(argc>1){
     
-        NodePtr rp = createRoot(atoi(argv[1]));
+        NodePointer rp = createRoot(atoi(argv[1]));
         int i; 
         for(i = 2; i<argc; i++){
         rp = addNode(rp, atoi(argv[i]));
@@ -77,11 +76,6 @@ int main( int argc, char** argv ) {
 
     printNodes(rp);        
     }//if
+printf("For it is the chief characteristic of the religion of science, that it works..");
 exit(0);    
 }//main
-
-
-  printf( "Hello from treesort!\n" );
-
-  exit(0);
-} // main( int, char** )
