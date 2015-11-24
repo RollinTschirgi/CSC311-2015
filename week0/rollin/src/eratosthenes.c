@@ -1,42 +1,55 @@
-
-// eratosthenes.c
-// Norbert Wiener
-// CSC311 Systems Software
-// 23 November 2015
+//eratosthenes.c
+//Rollin Tschirgi
+//CSC311 Systemas software
+//23/Nov/2015
 
 #include <stdio.h>
 #include <stdlib.h>
 
-// this program will identify all
-// prime numbers that are < SIZE
+//define variable Size so we don't have to type 1million every time
+//program will find all primes less than SIZE
+#define SIZE 1000000
 
-// filter() executes the Sieve of Eratosthenes
-// algorithm
+int bitmap[SIZE];
+
+//the main sieve function
+void filter(){
+
+  int i = 0;
+  int j = 2;
   
-  // initialize bitmap (array of zeroes and ones)
-  // 0 and 1 are not prime
-  // begin by assuming that any integer >= 2 could
-  // be prime
+  //initialize first two to 1 aka: isDivisible=true
+  bitmap[0] = bitmap[1] = 1;
+  
+  //initialize the rest to zero
+  for(i=2; i<SIZE; i++) {
+  bitmap[i]=0;
+  }
+  
+  //begin search at 2 could be in the form of a four loop
+  i=2;
+  while(i < SIZE){
+    if(bitmap[i]==0){
+      
+      for(j=i+i; j<SIZE; j+=i){
+        bitmap[j]=1;
+      }//for
+      
+    }//if
+    i++;
+  }//while
 
-    // bitmap[i] = 0 means i could be prime
-    // (the next loop will determine if i is really prime)
+}//filter()
 
-
-
-  // 2 is the smallest prime number so
-  // start the search for prime numbers
-  // at 2
-
-      // if i is prime, then all of its 
-      // multiples are composite (not prime)
-
-
-int main( int argc, char** argv ) {
-  // find all of the prime numbers < SIZE
-
-  // print all of the prime numbers < SIZE
-
-  printf( "Hello from eratosthenes!\n" );
-
-  exit(0);
-} // main( int, char** )
+int main(int argc, char** argv){
+  
+  filter();
+  
+  int i;
+  for(i=0; i<SIZE; i++){
+    
+    if (bitmap[i] == 0){
+      printf("%d is prime \n", i);
+    }//if
+  }//for
+}//main
