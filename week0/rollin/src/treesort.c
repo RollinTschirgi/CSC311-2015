@@ -67,6 +67,19 @@ int main( int argc, char** argv ) {
   // build a binary search tree that
   // contains integers found on the command line,
   // then print the integers in ascending order
+    if(argc>1){
+    
+        NodePtr rp = createRoot(atoi(argv[1]));
+        int i; 
+        for(i = 2; i<argc; i++){
+        rp = addNode(rp, atoi(argv[i]));
+        }//for
+
+    printNodes(rp);        
+    }//if
+exit(0);    
+}//main
+
 
   printf( "Hello from treesort!\n" );
 
